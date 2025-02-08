@@ -1,0 +1,67 @@
+<?php
+
+App::uses('CakeSessionHandlerInterface', 'Model/Datasource/Session');
+
+use Aws\DynamoDb\SessionHandler;
+
+/*
+ * Cake wrapper for DynamoDB PHP Session Handler
+ * https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/service_dynamodb-session-handler.html
+*/
+
+class DynamoSession implements CakeSessionHandlerInterface
+{
+    private $sessionHandler;
+
+    public function __construct()
+    {
+
+        $dynamoDb = new \Aws\DynamoDb\DynamoDbClient([
+            'region' => getenv('COMANAGE_REGISTRY_DYNAMODB_REGION'),
+            'credentials' => [
+                'key' => getenv('COMANAGE_REGISTRY_DYNAMODB_PHPSESSIONS_ACCESSKEY'),
+                'secret' => getenv('COMANAGE_REGISTRY_DYNAMODB_PHPSESSIONS_SECRETACCESSKEY'),
+            ],
+            //'debug' => true,
+        ]);
+        $this->sessionHandler = SessionHandler::fromClient($dynamoDb, [
+            'table_name' => getenv('COMANAGE_REGISTRY_DYNAMODB_PHPSESSIONS_TABLE'),
+            'hash_key' => 'id',
+            'data_attribute' => 'data',
+            'session_lifetime_attribute' => 'expires',
+        ]);
+        $this->sessionHandler->register();
+    }
+
+    public function close(): bool
+    {
+        return $this->sessionHandler->close();
+    }
+
+    public function destroy($sessionId): bool
+    {
+        return $this->sessionHandler->destroy($sessionId);
+    }
+
+    public function gc($expires = null): bool
+    {
+        return $this->sessionHandler->gc($expires);
+    }
+
+    public function open(): bool
+    {
+        $sessionName = 'PHPSESSID';
+        $savePath = null; // DynamoDB has no file path
+        return $this->sessionHandler->open($savePath, $sessionName);
+    }
+
+    public function read($sessionId)
+    {
+        return $this->sessionHandler->read($sessionId);
+    }
+
+    public function write($sessionId, $sessionData): bool
+    {
+        return $this->sessionHandler->write($sessionId, $sessionData);
+    }
+}
