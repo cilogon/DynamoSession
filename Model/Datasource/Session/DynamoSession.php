@@ -6,7 +6,13 @@ use Aws\DynamoDb\SessionHandler;
 
 /*
  * Cake wrapper for DynamoDB PHP Session Handler
+ *
+ * CakePHP reference:
+ * https://book.cakephp.org/2/en/development/sessions.html
+ *
+ * AWS SDK for PHP v3 reference:
  * https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/service_dynamodb-session-handler.html
+ * https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.DynamoDb.SessionHandler.html
 */
 
 class DynamoSession implements CakeSessionHandlerInterface
