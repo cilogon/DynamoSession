@@ -5,10 +5,10 @@ using the AWS SDK for PHP v3.x Aws\DynamoDb\SessionHandler.
 
 ## CloudFormation configuration prerequisites
 
+### AWS::DynamoDB::Table
+
 A DynamoDB table configured with an `id` attribute of the String type as a `HASH` key type, with a TTL attribute with
 the name `expires`:
-
-### AWS::DynamoDB::Table
 
 ```yaml
 DynamoCakePHPSessionsTable:
@@ -26,6 +26,8 @@ DynamoCakePHPSessionsTable:
     TableName: dynamo_cakephp_sessions
     BillingMode: "PAY_PER_REQUEST"
 ```
+
+### AWS::IAM::User
 
 An IAM user with a policy that allows the full set of data updates to the table:
 
@@ -48,6 +50,8 @@ DynameCakePHPSessionsUser:
                 - 'dynamodb:BatchWriteItem'
               Resource: !GetAtt DynamoCakePHPSessionsTable.Arn
 ```
+
+### AWS::IAM::AccessKey
 
 An API access key attached to that user to pass into environment variables for the CakePHP web server:
 
