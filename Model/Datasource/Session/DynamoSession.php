@@ -56,7 +56,7 @@ class DynamoSession implements CakeSessionHandlerInterface
 
     public function open(): bool
     {
-        $sessionName = 'PHPSESSID';
+        $sessionName = Configure::Read('Session.cookie');
         $savePath = null; // DynamoDB has no file path
         return $this->sessionHandler->open($savePath, $sessionName);
     }
