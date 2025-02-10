@@ -79,13 +79,16 @@ the `handler` to use this plugin:
 
 ```php
  Configure::write('Session', array(
-    'defaults' => 'php',
+    'cookie' => 'CAKEPHP',
     'timeout' => 480,
     'cookieTimeout' => 480,
     'handler' => array(
       'engine' => 'DynamoSession.DynamoSession',
     ),
     'ini' => array(
+      'session.use_trans_sid' => 0,
+      'session.use_cookies' => 1,
+      'session.serialize_handler' => 'php',
       'session.cookie_httponly' => true,
       // session.gc_maxlifetime in seconds
       // default is 1440 (24 minutes)
