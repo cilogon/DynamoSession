@@ -73,4 +73,9 @@ class DynamoSession implements CakeSessionHandlerInterface
     {
         return $this->sessionHandler->write($sessionId, $sessionData);
     }
+
+    public function isPlugin(): bool
+    {
+        return true;
+    }
 }
