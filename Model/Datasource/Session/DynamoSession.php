@@ -36,7 +36,10 @@ class DynamoSession implements CakeSessionHandlerInterface
             'data_attribute' => 'data',
             'session_lifetime_attribute' => 'expires',
         ]);
-        $this->sessionHandler->register();
+
+        // do not need to register, as CakePHP routes everything through this class
+        // and registers this class as the custom session.save_handler
+        /* $this->sessionHandler->register(); */
     }
 
     public function close(): bool
