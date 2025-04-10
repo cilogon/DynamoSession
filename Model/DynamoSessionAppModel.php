@@ -3,5 +3,4 @@
 App::uses('AppModel', 'Model');
 
 class DynamoSessionAppModel extends AppModel {
-    public $cmPluginType = "other";
 }
