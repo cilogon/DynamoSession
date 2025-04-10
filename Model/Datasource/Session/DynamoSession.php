@@ -74,8 +74,9 @@ class DynamoSession implements CakeSessionHandlerInterface
         return $this->sessionHandler->write($sessionId, $sessionData);
     }
 
+    /* prevent COmanage/Cake from trying to use this as a generic Datasource */
     public function isPlugin(): bool
     {
-        return true;
+        return false;
     }
 }
