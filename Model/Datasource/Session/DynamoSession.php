@@ -1,9 +1,5 @@
 <?php
 
-App::uses('CakeSessionHandlerInterface', 'Model/Datasource/Session');
-
-use Aws\DynamoDb\SessionHandler;
-
 /*
  * Cake wrapper for DynamoDB PHP Session Handler
  *
@@ -14,6 +10,10 @@ use Aws\DynamoDb\SessionHandler;
  * https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/service_dynamodb-session-handler.html
  * https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.DynamoDb.SessionHandler.html
 */
+
+App::uses('CakeSessionHandlerInterface', 'Model/Datasource/Session');
+
+use Aws\DynamoDb\SessionHandler;
 
 class DynamoSession implements CakeSessionHandlerInterface
 {
