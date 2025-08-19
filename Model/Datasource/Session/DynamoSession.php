@@ -24,7 +24,7 @@ class DynamoSession implements CakeSessionHandlerInterface
 
         $dynamoDb = new \Aws\DynamoDb\DynamoDbClient([
             'region' => getenv('COMANAGE_REGISTRY_DYNAMODB_REGION'),
-            'endpoint' => getenv('COMANAGE_REGISTRY_DYNAMODB_ENDPOINT') ?? null,
+            //'endpoint' => getenv('COMANAGE_REGISTRY_DYNAMODB_ENDPOINT') ?? null,
             'credentials' => [
                 'key' => getenv('COMANAGE_REGISTRY_DYNAMODB_PHPSESSIONS_ACCESSKEY'),
                 'secret' => getenv('COMANAGE_REGISTRY_DYNAMODB_PHPSESSIONS_SECRETACCESSKEY'),
